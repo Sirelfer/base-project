@@ -20,7 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
     - name: Build Docker image
-      run: docker build -t tuusuario/base-image:latest -f Dockerfile.base .
+      run: docker build -t elfer/base-image:latest -f Dockerfile.base .
 
     - name: Push Docker image
-      run: docker push tuusuario/base-image:latest
+      run: docker push elfer/base-image:latest
