@@ -103,12 +103,12 @@ These vulnerabilities were fixed by updating the dependencies to their latest ve
 Security Practices
 Automatic Updates: Dependencies are automatically updated in each build.
 
-Continuous Scanning: Integration of Trivy and Bandit in the CI/CD pipeline.
+Continuous Scanning: Integration of Trivy and Bandit in the CI/CD pipeline
 
 Secrets Management: Use of GitHub Secrets to securely store credentials.
 
 
-##License
+##License 
 This project is licensed under the MIT License. See LICENSE for more details.
 
 ![Build Status](https://github.com/yourusername/base-project/actions/workflows/ci-cd.yml/badge.svg)
