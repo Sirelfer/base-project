@@ -1,0 +1,16 @@
+title = "Gitleaks Configuration for Base Image"
+
+[[rules]]
+description = "Detect Docker Hub tokens"
+regex = '''dockerhub_(token|key)'''
+tags = ["docker", "token"]
+
+[[rules]]
+description = "Detect Snyk tokens"
+regex = '''snyk_(token|key)'''
+tags = ["snyk", "token"]
+
+[[rules]]
+description = "Detect generic API keys"
+regex = '''(?i)(api|access|secret)[_-]?key'''
+tags = ["api", "key"]
