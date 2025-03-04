@@ -77,8 +77,9 @@ To use this base image in your project, simply reference the image in your Docke
       # Command to run the application
       CMD ["python", "app.py"]
 
+```
 
-## **Security**
+## Security**
 This project follows DevSecOps best practices to ensure the security of applications built on this base image.
 
 ## Security Tools
@@ -107,3 +108,30 @@ Continuous Scanning: Integration of Trivy and Bandit in the CI/CD pipeline.
 Secrets Management: Use of GitHub Secrets to securely store credentials.
 
 
+##License
+This project is licensed under the MIT License. See LICENSE for more details.
+
+
+---
+
+### **Explanation of the `README.md`**
+
+1. **Description**: Explains what the project is and its purpose.
+2. **Features**: Highlights the key features, especially those related to security.
+3. **Installation**: Provides clear instructions for building and using the image.
+4. **Usage**: Shows how to use the base image in other projects.
+5. **Security**: Details the security tools and practices implemented, including the fixed vulnerabilities.
+6. **Contributing**: Guides on how to contribute to the project.
+7. **License**: Specifies the terms of use for the project.
+
+---
+
+### **Step 2: Add Badges**
+
+Badges are a visual way to show the status of the project. Here are some examples of badges you can add:
+
+```markdown
+![Build Status](https://github.com/yourusername/base-project/actions/workflows/ci-cd.yml/badge.svg)
+![Trivy Scan](https://img.shields.io/badge/Trivy-Scan%20Passed-brightgreen)
+![Bandit Scan](https://img.shields.io/badge/Bandit-Scan%20Passed-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
