@@ -109,7 +109,7 @@ Secrets Management: Use of GitHub Secrets to securely store credentials.
 
 
 ##License
-This project is licensed under the MIT License. See LICENSE for more details.
+This project is licensed under the MIT License. See LICENSE for more details. 
 
 ![Build Status](https://github.com/yourusername/base-project/actions/workflows/ci-cd.yml/badge.svg)
 ![Trivy Scan](https://img.shields.io/badge/Trivy-Scan%20Passed-brightgreen)
