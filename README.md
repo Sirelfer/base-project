@@ -48,32 +48,37 @@ To use this base image in your project, follow these steps:
    cd base-project
 
 2. **Build Image**:
-
+      
+      ```bash
       docker build -t yourusername/base-image:latest -f Dockerfile.base .
 
 3. **Push the image to Docker Hub (optional)**:
 
+      ```bash
       docker push yourusername/base-image:latest
 
 ## Usage
 
 To use this base image in your project, simply reference the image in your Dockerfile:
 
-dockerfile
-Copy
-FROM yourusername/base-image:latest
+   ```bash
+      dockerfile
+      Copy
+      FROM yourusername/base-image:latest
 
-WORKDIR /app
+      WORKDIR /app
 
-# Copy the application code
-COPY . .
+      # Copy the application code
+      COPY . .
 
-# Install additional dependencies (if needed)
-RUN pip install -r requirements.txt
+      # Install additional dependencies (if needed)
+      RUN pip install -r requirements.txt
 
-# Command to run the application
-CMD ["python", "app.py"]
-Security
+      # Command to run the application
+      CMD ["python", "app.py"]
+
+
+## **Security**
 This project follows DevSecOps best practices to ensure the security of applications built on this base image.
 
 ## Security Tools
