@@ -33,7 +33,7 @@ jobs:
         continue-on-error: true  # Permite que el job continúe incluso si Bandit encuentra problemas
 
       - name: Upload Bandit Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: bandit-report
           path: bandit_results.json
@@ -45,7 +45,7 @@ jobs:
         continue-on-error: true  # Permite que el job continúe incluso si Safety encuentra problemas
 
       - name: Upload Safety Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: safety-report
           path: safety_report.txt
@@ -71,7 +71,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t base-image:latest -f Dockerfile .
+        run: docker build -t base-image:latest -f Dockerfile.base .
 
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
