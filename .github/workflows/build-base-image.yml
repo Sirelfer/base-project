@@ -20,23 +20,29 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       
-      # 3. Escanear el docker con Checkov
+      # 3. Escanear el codigo con Semgrep
+      - name: Run Semgrep
+        run: | 
+         pip install semgrep
+         semgrep --config=auto --error
+
+      # 4. Escanear el docker con Checkov
       - name: Run Checkov 
         run: |
          pip install checkov
          checkov -f Dockerfile.base --quiet
 
-      # 4. Construir la imagen Docker
+      # 5. Construir la imagen Docker
       - name: Build Docker image
         run: docker build -t base-image:latest -f Dockerfile.base .
 
-      # 5. Escanear la imagen con Trivy
+      # 6. Escanear la imagen con Trivy
       - name: Scan Docker image with Trivy
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
           trivy image --severity HIGH,CRITICAL base-image:latest
 
-      # 6. Subir la imagen a Docker Hub (solo en la rama main)
+      # 7. Subir la imagen a Docker Hub (solo en la rama main)
       - name: Push Docker image (if on main branch)
         if: github.ref == 'refs/heads/main'
         run: |
