@@ -105,7 +105,7 @@ Automatic Updates: Dependencies are automatically updated in each build.
 
 Continuous Scanning: Integration of Trivy and Bandit in the CI/CD pipeline.
 
-Secrets Management: Use of GitHub Secrets to securely store credentials.
+Secrets Management: Use of GitHub Secrets to securely store credentials.  
 
 
 ##License
