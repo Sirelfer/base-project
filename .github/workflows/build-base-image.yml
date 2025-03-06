@@ -1,26 +1,38 @@
-name: Build and Push Base Docker Image
+name: Base Image CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  build-and-push:
+  build-and-scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # 1. Clonar el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      # 2. Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-    - name: Build Docker image
-      run: docker build -t elfer/base-image:latest -f Dockerfile.base .
+      # 3. Construir la imagen Docker
+      - name: Build Docker image
+        run: docker build -t base-image:latest -f Dockerfile.base .
 
-    - name: Push Docker image
-      run: docker push elfer/base-image:latest
+      # 4. Escanear la imagen con Trivy
+      - name: Scan Docker image with Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+          trivy image --severity HIGH,CRITICAL base-image:latest
+
+      # 5. Subir la imagen a Docker Hub (solo en la rama main)
+      - name: Push Docker image (if on main branch)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker tag base-image:latest ${{ secrets.DOCKER_HUB_USERNAME }}/base-image:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/base-image:latest
