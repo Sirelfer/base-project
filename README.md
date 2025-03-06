@@ -83,30 +83,72 @@ To use this base image in your project, simply reference the image in your Docke
 This project follows DevSecOps best practices to ensure the security of applications built on this base image.
 
 ## Security Tools
+
 Trivy: Scans the Docker image for vulnerabilities.
 
 Bandit: Performs static analysis of Python code to detect common vulnerabilities.
+
+Semgrep: Scans code and configurations for insecure patterns.
+
+Checkov: Scans the Dockerfile for insecure configurations.
 
 Safety: Checks Python dependencies for known vulnerabilities.
 
 Fixed Vulnerabilities
 During the development of this project, several vulnerabilities were identified and fixed, including:
 
-CVE-2023-5752: A vulnerability in pip that allowed Mercurial configuration injection.
+*CVE-2023-5752: A vulnerability in pip that allowed Mercurial configuration injection.
 
-CVE-2022-40897: A Denial of Service (ReDoS) vulnerability in setuptools.
+*CVE-2022-40897: A Denial of Service (ReDoS) vulnerability in setuptools.
 
-CVE-2024-6345: A Remote Code Execution (RCE) vulnerability in setuptools.
+*CVE-2024-6345: A Remote Code Execution (RCE) vulnerability in setuptools.
 
 These vulnerabilities were fixed by updating the dependencies to their latest versions.
 
 Security Practices
-Automatic Updates: Dependencies are automatically updated in each build.
 
-Continuous Scanning: Integration of Trivy and Bandit in the CI/CD pipeline
+* Automatic Updates: Dependencies are automatically updated in each build.
 
-Secrets Management: Use of GitHub Secrets to securely store credentials.
+* Continuous Scanning: Integration of Trivy, Bandit, Semgrep, and Checkov in the CI/CD pipeline.
 
+* Secrets Management: Use of GitHub Secrets to securely store credentials.
+
+-
+## CI/CD Pipeline
+The CI/CD pipeline is configured to ensure that the base image is secure and production-ready. Below is a breakdown of the pipeline stages:
+
+Pipeline Stages
+
+1. Checkout Code:
+
+      *Clones the repository to start the process.
+
+2. Security Scanning (SAST):
+
+      *Semgrep: Scans the code for insecure patterns.
+
+      *Checkov: Scans the Dockerfile for insecure configurations.
+
+3. Build Docker Image:
+
+      *Builds the Docker image using the Dockerfile.
+
+4. Image Scanning (SAST):
+
+      *Trivy: Scans the Docker image for vulnerabilities.
+
+5. Push to Docker Hub:
+
+      *If the pipeline runs on the main branch, the image is pushed to Docker Hub.
+
+## How to Interpret Results
+
+Semgrep: If issues are found, the pipeline will fail, and a detailed report will be available in the logs.
+
+Checkov: If insecure configurations are detected, the pipeline will fail, and a report will be generated.
+
+Trivy: If vulnerabilities are found, the pipeline will fail, and a detailed report will be available.
+-
 
 ##License
 This project is licensed under the MIT License. See LICENSE for more details.

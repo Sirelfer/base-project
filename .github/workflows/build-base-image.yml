@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Clonar el repositorio
+      # 1. Clone the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -20,29 +20,29 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       
-      # 3. Escanear el codigo con Semgrep
-      - name: Run Semgrep
+      # 3. SAST - Cody Analysis with Semgrep
+      - name: SAST - Run Semgrep
         run: | 
          pip install semgrep
          semgrep --config=auto --error
 
-      # 4. Escanear el docker con Checkov
-      - name: Run Checkov 
+      # 4. SAST - Cody Analysis with Checkov
+      - name: SAST - Run Checkov 
         run: |
          pip install checkov
          checkov -f Dockerfile.base --quiet
 
-      # 5. Construir la imagen Docker
+      # 5. Build image Dockerfile.base
       - name: Build Docker image
         run: docker build -t base-image:latest -f Dockerfile.base .
 
-      # 6. Escanear la imagen con Trivy
-      - name: Scan Docker image with Trivy
+      # 6. SAST - Docker Analysis with trivy
+      - name: SAST - Scan Docker image with Trivy
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
           trivy image --severity HIGH,CRITICAL base-image:latest
 
-      # 7. Subir la imagen a Docker Hub (solo en la rama main)
+      # 7. Push and Deploy
       - name: Push Docker image (if on main branch)
         if: github.ref == 'refs/heads/main'
         run: |
