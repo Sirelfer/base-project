@@ -82,6 +82,7 @@ To use this base image in your project, simply reference the image in your Docke
 ## Security
 This project follows DevSecOps best practices to ensure the security of applications built on this base image.
 
+
 ## Security Tools
 
 Trivy: Scans the Docker image for vulnerabilities.
@@ -94,7 +95,8 @@ Checkov: Scans the Dockerfile for insecure configurations.
 
 Safety: Checks Python dependencies for known vulnerabilities.
 
-Fixed Vulnerabilities
+## Fixed Vulnerabilities
+
 During the development of this project, several vulnerabilities were identified and fixed, including:
 
 * CVE-2023-5752: A vulnerability in pip that allowed Mercurial configuration injection.
@@ -103,15 +105,23 @@ During the development of this project, several vulnerabilities were identified 
 
 * CVE-2024-6345: A Remote Code Execution (RCE) vulnerability in setuptools.
 
+* **CVE-2023-31484 (perl-base)**:
+  
+  - **Description**: A vulnerability in Perl related to missing TLS certificate verification when downloading distributions over HTTPS.
+  - **Solution**: Updated `perl-base` to version `5.36.0-7+deb12u2`.
+
+* **CVE-2023-45853 (zlib1g)**:
+  
+  - **Description**: A critical vulnerability in zlib allowing integer overflow and heap-based buffer overflow.
+  - **Solution**: Updated `zlib1g` to version `1:1.2.13.dfsg-2`
+
 These vulnerabilities were fixed by updating the dependencies to their latest versions.
 
-Security Practices
+### **Security Practices**
 
-* Automatic Updates: Dependencies are automatically updated in each build.
-
-* Continuous Scanning: Integration of Trivy, Bandit, Semgrep, and Checkov in the CI/CD pipeline.
-
-* Secrets Management: Use of GitHub Secrets to securely store credentials.
+- **Automatic Updates**: System packages are updated during the Docker image build process.
+- **Continuous Scanning**: Integration of **Trivy** in the CI/CD pipeline to scan for vulnerabilities.
+- **Minimal Base Image**: Uses `python:3.9-slim` to reduce the attack surface.
 
 ## CI/CD Pipeline
 The CI/CD pipeline is configured to ensure that the base image is secure and production-ready. Below is a breakdown of the pipeline stages:

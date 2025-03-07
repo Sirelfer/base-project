@@ -4,7 +4,9 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Instala dependencias básicas
-RUN pip install --upgrade pip
+RUN apt-get update && apt-get upgrade -y && apt-get install -y perl-base zlib1g && rm -rf /var/lib/apt/lists/*
+
+# Versión corregida de perl-basezlib1g=1:1.2.13.dfsg-2 \       # Versión corregida de zlib1g&& rm -rf /var/lib/apt/lists/*
 
 # Copia los requisitos e instala las dependencias
 COPY requirements.txt .
