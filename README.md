@@ -121,7 +121,7 @@ These vulnerabilities were fixed by updating the dependencies to their latest ve
 
 - **Automatic Updates**: System packages are updated during the Docker image build process.
 - **Continuous Scanning**: Integration of **Trivy** in the CI/CD pipeline to scan for vulnerabilities.
-- **Minimal Base Image**: Uses `python:3.9-slim` to reduce the attack surface.
+- **Minimal Base Image**: Uses `python:3.9-slim` to reduce the attack surface. 
 
 ## CI/CD Pipeline
 The CI/CD pipeline is configured to ensure that the base image is secure and production-ready. Below is a breakdown of the pipeline stages:
