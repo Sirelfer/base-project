@@ -2,3 +2,4 @@ flask
 pytest
 bandit
 safety
+gunicorn==23.0.0
